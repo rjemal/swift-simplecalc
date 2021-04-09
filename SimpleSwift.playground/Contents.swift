@@ -1,12 +1,64 @@
 print("Welcome to the UW Calculator Playground")
 
 func calculate(_ args: [String]) -> Int {
-    return -1
+    switch args.last{
+    case "count":
+        return args.count - 1
+    case "avg":
+        if args.count == 1{
+            return 0
+        }
+        var sum = 0
+        if args.count > 2{
+        for number in 0...(args.count - 1)  {
+                   sum += Int(args[number]) ?? 0
+               }
+        return sum / (args.count - 1)
+        }
+        else {
+            for number in 0...(args.count - 1)  {
+                       sum += Int(args[number]) ?? 0
+                   }
+            return sum / (1)
+            
+        }
+    case "fact":
+        if args.count == 1{
+            return 0
+        }
+        if Int(args[0]) ==  0 {
+            return 1
+        }
+        var sum = 1
+        for number in 1...Int(args[0])! {
+            sum *= number
+        }
+        return sum
+    default:
+        if args[1] == "+" {
+            return Int(args[0])! + Int(args[2])!
+        }
+        else if args[1] == "-" {
+            return Int(args[0])! - Int(args[2])!
+        }
+        else if args[1] == "/" {
+            return Int(args[0])! / Int(args[2])!
+        }
+        else if args[1] == "%" {
+            return Int(args[0])! % Int(args[2])!
+        }
+        else if args[1] == "*" {
+            return Int(args[0])! * Int(args[2])!
+        }
+    }
+    return 0
+}
+func calculate(_ arg: String) -> Int {
+    let split = calculate(arg.split(separator: " ").map(String.init))
+    return split
 }
 
-func calculate(_ arg: String) -> Int {
-    return -1
-}
+
 
 // -------------------------------------------
 // All of these expressions should return true
@@ -31,7 +83,6 @@ calculate(["2", "avg"]) == 2
     // 2 / 1 = 2
 calculate(["avg"]) == 0
     // 0 / 0 = 0 (not really, but it's an edge case
-
 calculate(["0", "fact"]) == 1
 calculate(["1", "fact"]) == 1
 calculate(["2", "fact"]) == 2 // 2*1
@@ -50,7 +101,6 @@ calculate("5 fact") == 120
 // -------------------------------------------
 // These are extra credit tests; commented out
 // uncomment them to turn them on for evaluation
-
 // Implement calculate([String]) and calculate(String)
 // to handle negative numbers
 /*
@@ -59,14 +109,11 @@ calculate(["2", "-", "-2"]) == 4
 calculate(["2", "*", "-2"]) == -4
 calculate(["2", "/", "-2"]) == -1
 calculate(["-5", "%", "2"]) == -1
-
 calculate(["1", "-2", "3", "-2", "5", "avg"]) == 1
-
 calculate("2 + -2") == 0
 calculate("2 * -2") == -4
 calculate("2 - -2") == 4
 calculate("-2 / 2") == -1
-
 calculate("1 -2 3 -4 5 count") == 5
 */
  
@@ -79,7 +126,6 @@ func calculate(_ args: [String]) -> Double {
 func calculate(_ arg: String) -> Double {
     return -1.0
 }
-
 calculate(["2.0", "+", "2.0"]) == 4.0
 calculate([".5", "+", "1.5"]) == 2.0
 calculate(["12.0", "-", "12.0"]) == 0.0
